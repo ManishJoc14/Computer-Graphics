@@ -1,31 +1,29 @@
+# Graphics library setup 
 
----
+## Quick setup
 
-## **Graphics Library Setup**
+```bash
+git clone https://github.com/ullaskunder3/graphics.h-project-template.git
+```
 
----
+Detail setup can be found on my other repo [solution-to-graphics.h](https://github.com/ullaskunder3/Solution-to-graphics.h)
 
-### **Quick Setup**  
-Clone the repository:  
-```bash  
-git clone https://github.com/ManishJoc14/Computer-Graphics.git  
-```  
+## My directory look like
 
-Your directory structure should look like this:  
-```plaintext  
-├───.vscode  
-└───Home  
-    ├───build  
-    └───src  
-```  
+```cmd
+  D:.
+├───.vscode
+└───Home
+    ├───build
+    └───src
+```
 
-To run the build task, simply press **`Ctrl+Shift+B`**. The executable file will be generated in the `build` folder.  
+- Just `Ctrl+Shift+B` to run the build task you will get the executable file in build folder
 
----
+## !mportant
 
-### **Important Notes**  
-- **`src` Folder**: Contains the source code for the graphics project.  
-- **`build` Folder**: The compiler generates `.exe` files in this folder after building.  
-- **`.vscode` Folder**: Includes `c_cpp_properties.json` and task configurations. You need to modify these files based on your system's environment and compiler type.  
+- Folder `src` contains source code
 
----
+- Folder `build` where compiler generate .exe
+
+- .vscode contains c_cpp_properties.json and task require modification according to your environment and types compiler
