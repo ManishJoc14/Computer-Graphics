@@ -25,15 +25,15 @@ void drawCircle(int h, int k, int r)
         }
 
         // translate the circle to the center (h, k)
-        putpixel(h + x, y + k, WHITE);
-        putpixel(h + y, k + x, WHITE);
-        putpixel(h + y, k - x, WHITE);
-        putpixel(h + x, k - y, WHITE);
+        putpixel(h + x, y + k, BLACK);
+        putpixel(h + y, k + x, BLACK);
+        putpixel(h + y, k - x, BLACK);
+        putpixel(h + x, k - y, BLACK);
 
-        putpixel(h - x, k - y, WHITE);
-        putpixel(h - y, k - x, WHITE);
-        putpixel(h - y, k + x, WHITE);
-        putpixel(h - x, k + y, WHITE);
+        putpixel(h - x, k - y, BLACK);
+        putpixel(h - y, k - x, BLACK);
+        putpixel(h - y, k + x, BLACK);
+        putpixel(h - x, k + y, BLACK);
 
     } while (x <= y);
 }
@@ -42,6 +42,8 @@ int main()
 {
     int gd = DETECT, gm;
     initgraph(&gd, &gm, NULL);
+    setbkcolor(WHITE);
+    cleardevice();
 
     // 1. circle with radius 50 and centre at (200,200)
     // drawCircle(200, 200, 50);
@@ -54,13 +56,13 @@ int main()
     //3. multiple circle pattern
     float PIE = 3.1415;
     int H = 200, K = 200, R = 150;    // for big circle
-    int N = 12;                       // no. of circles
+    int N = 6;                       // no. of circles
     int r = round((PIE / N) * R);     // radius of small circle
     float angle = (2 * r) / (float)R; // angle substended by one circle
 
     drawCircle(H, K, R); // big circle
 
-    for (int i = 1; i <= 12; i++)
+    for (int i = 1; i <= N; i++)
     {
 
         int h = H + R * cos(i * angle),
