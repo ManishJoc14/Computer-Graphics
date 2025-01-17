@@ -13,6 +13,11 @@ void drawEllipse(int h, int k, int rx, int ry)
 
     do
     {
+        putpixel(h + x, k + y, BLACK);
+        putpixel(h + x, k - y, BLACK);
+        putpixel(h - x, k - y, BLACK);
+        putpixel(h - x, k + y, BLACK);
+
         if (p1 < 0)
         {
             x++;
@@ -26,16 +31,6 @@ void drawEllipse(int h, int k, int rx, int ry)
             p1 += 2 * pow(ry, 2) * x - 2 * pow(rx, 2) * y + pow(ry, 2);
         }
 
-        if (p1 == 0)
-        {
-            x++;
-            y = y - 0.5;
-        }
-
-        putpixel(h + x, k + y, WHITE);
-        putpixel(h + x, k - y, WHITE);
-        putpixel(h - x, k - y, WHITE);
-        putpixel(h - x, k + y, WHITE);
         delay(5);
     } while (2 * pow(ry, 2) * x <= 2 * pow(rx, 2) * y);
 
@@ -45,10 +40,10 @@ void drawEllipse(int h, int k, int rx, int ry)
     do
     {
 
-        putpixel(h + x, k + y, WHITE);
-        putpixel(h + x, k - y, WHITE);
-        putpixel(h - x, k - y, WHITE);
-        putpixel(h - x, k + y, WHITE);
+        putpixel(h + x, k + y, BLACK);
+        putpixel(h + x, k - y, BLACK);
+        putpixel(h - x, k - y, BLACK);
+        putpixel(h - x, k + y, BLACK);
 
         if (p2 > 0)
         {
@@ -63,12 +58,6 @@ void drawEllipse(int h, int k, int rx, int ry)
             p2 += +2 * pow(ry, 2) * x - 2 * pow(rx, 2) * y + pow(rx, 2);
         }
 
-        if (p2 == 0)
-        {
-            x++;
-            y = y - 0.5;
-        }
-
         delay(5);
 
     } while (y >= 0);
@@ -78,10 +67,14 @@ int main()
 {
     int gd = DETECT, gm;
     initgraph(&gd, &gm, NULL);
+    setbkcolor(WHITE);
+    cleardevice();
 
+    // Question 1
     // drawEllipse(200, 200, 160, 120);
 
-    int H = 300, K = 300, Rx = 140, Ry = 170; // for big ellipse
+    // Question 2
+    int H = 250, K = 240, Rx = 120, Ry = 180; // for big ellipse
     int N = 12;                               // no. of ellipses
 
     int rx = round((M_PI / N) * Rx); // radius of small ellipse

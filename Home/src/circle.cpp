@@ -45,28 +45,26 @@ int main()
     setbkcolor(WHITE);
     cleardevice();
 
-    // 1. circle with radius 50 and centre at (200,200)
+    // Question 1. circle with radius 50 and centre at (200,200)
     // drawCircle(200, 200, 50);
 
-    // 2. concentric circular pattern
+    // Question 2. concentric circular pattern
     // drawCircle(200, 200, 25);
     // drawCircle(200, 200, 50);
     // drawCircle(200, 200, 75);
 
-    //3. multiple circle pattern
-    float PIE = 3.1415;
-    int H = 200, K = 200, R = 150;    // for big circle
-    int N = 6;                       // no. of circles
-    int r = round((PIE / N) * R);     // radius of small circle
-    float angle = (2 * r) / (float)R; // angle substended by one circle
+    // Question 3. multiple circle pattern
+    int H = 200, K = 200, R = 150; // for big circle
+    int N = 12;                    // no. of circles
+    int r = round((M_PI / N) * R); // radius of small circle
 
     drawCircle(H, K, R); // big circle
 
     for (int i = 1; i <= N; i++)
     {
-
-        int h = H + R * cos(i * angle),
-            k = K + R * sin(i * angle);
+        float angle = 2 * i * M_PI / N;
+        int h = H + R * cos(angle),
+            k = K + R * sin(angle);
 
         drawCircle(h, k, r); // small circle
         delay(50);
