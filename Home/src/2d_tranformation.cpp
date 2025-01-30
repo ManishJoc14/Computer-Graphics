@@ -5,17 +5,6 @@
 
 #define n 3
 
-void addMatrix(float a[n][n], float b[n][n], float c[n][n])
-{
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            c[i][j] = a[i][j] + b[i][j];
-        }
-    }
-}
-
 void multiplyMatrix(float a[n][n], float b[n][n], float c[n][n])
 {
     for (int i = 0; i < n; i++)
@@ -31,14 +20,12 @@ void multiplyMatrix(float a[n][n], float b[n][n], float c[n][n])
     }
 }
 
-void printMatrix(float matrix[n][n])
+void printMatrix(float matrix[n][n], int COLOR)
 {
-
-    putpixel(matrix[0][0], matrix[1][0], WHITE);
-
-    putpixel(matrix[0][1], matrix[1][1], WHITE);
-
-    putpixel(matrix[0][2], matrix[1][2], WHITE);
+    setcolor(COLOR);
+    line(matrix[0][0], matrix[1][0], matrix[0][1], matrix[1][1]);
+    line(matrix[0][1], matrix[1][1], matrix[0][2], matrix[1][2]);
+    line(matrix[0][2], matrix[1][2], matrix[0][0], matrix[1][0]);
 }
 
 void inputMatrix(float matrix[n][n])
@@ -92,91 +79,108 @@ int main()
     int choice;
     float Obj[n][n];
     float Img[n][n];
-    // translation
+
+    // for translation
     float tx, ty;
 
-    // rotation
+    // for rotation
     float p, q, thita;
 
-    // scaling
+    // for scaling
     float a, b, sx, sy;
     initgraph(&gd, &gm, NULL);
+    setbkcolor(WHITE);
+    cleardevice();
 
-restart:
-    printf("\n\n1. Translation  2. Rotation  3. Scaling\n");
-    printf("Enter your choice: ");
-    scanf("%d", &choice);
+    float xh = getmaxx();
+    float yh = getmaxy();
 
-    switch (choice)
+    setcolor(BLACK);
+    // print axis
+    line(xh / 2, 0, xh / 2, yh);
+    line(0, yh / 2, xh, yh / 2);
+
+    do
     {
-    case 1:
 
-        printf("\n---------------Translation of matrix---------------\n");
+        printf("\n\n1. Translation  2. Rotation  3. Scaling 4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
 
-        printf("Enter object matrix: \n");
-        inputMatrix(Obj);
+        switch (choice)
+        {
+        case 1:
 
-        printf("Enter new center coordinates: ");
-        printf("\na= ");
-        scanf("%f", &a);
-        printf("b= ");
+            printf("\n---------------Translation of matrix---------------\n");
 
-        scanf("%f", &b);
+            printf("Enter object matrix: \n");
+            inputMatrix(Obj);
 
-        translateMatrix(Obj, Img, tx, ty);
-        printMatrix(Img);
-        goto restart;
-        break;
+            printf("Enter new center coordinates: ");
+            printf("\ntx= ");
+            scanf("%f", &tx);
+            printf("ty= ");
+            scanf("%f", &ty);
 
-    case 2:
-        printf("\n---------------Rotation of matrix---------------\n");
+            translateMatrix(Obj, Img, tx, ty);
 
-        printf("Enter object matrix: \n");
-        inputMatrix(Obj);
+            printMatrix(Obj, GREEN);
+            printMatrix(Img, GREEN);
+            break;
 
-        printf("Enter coordinates of fixed point: ");
-        printf("\np= ");
-        scanf("%f", &p);
-        printf("q= ");
-        scanf("%f", &q);
+        case 2:
+            printf("\n---------------Rotation of matrix---------------\n");
 
-        printf("Enter andle thita: ");
-        printf("\nThita= ");
-        scanf("%f", &thita);
+            printf("Enter object matrix: \n");
+            inputMatrix(Obj);
 
-        rotateMatrix(Obj, Img, p, q, thita);
-        printMatrix(Img);
-        goto restart;
-        break;
+            printf("Enter coordinates of fixed point: ");
+            printf("\np= ");
+            scanf("%f", &p);
+            printf("q= ");
+            scanf("%f", &q);
 
-    case 3:
-        printf("\n---------------Scaling of matrix---------------\n");
+            printf("Enter angle thita in degrees: ");
+            printf("\nThita= ");
+            scanf("%f", &thita);
+            thita = thita * M_PI / 180;
 
-        printf("Enter object matrix: \n");
-        inputMatrix(Obj);
+            rotateMatrix(Obj, Img, p, q, thita);
+            printMatrix(Obj, BLUE);
+            printMatrix(Img, BLUE);
+            break;
 
-        printf("Enter coordinates of fixed point: ");
-        printf("\na= ");
-        scanf("%f", &a);
-        printf("b= ");
-        scanf("%f", &b);
+        case 3:
+            printf("\n---------------Scaling of matrix---------------\n");
 
-        printf("Enter the scaling factor: ");
-        printf("\nsx= ");
-        scanf("%f", &sx);
-        printf("sy= ");
-        scanf("%f", &sy);
+            printf("Enter object matrix: \n");
+            inputMatrix(Obj);
 
-        scaleMatrix(Obj, Img, a, b, sx, sy);
-        printMatrix(Img);
-        goto restart;
-        break;
+            printf("Enter coordinates of fixed point: ");
+            printf("\na= ");
+            scanf("%f", &a);
+            printf("b= ");
+            scanf("%f", &b);
 
-    default:
-        printf("Wrong choice!!");
-        goto restart;
-        break;
-    };
+            printf("Enter the scaling factor: ");
+            printf("\nsx= ");
+            scanf("%f", &sx);
+            printf("sy= ");
+            scanf("%f", &sy);
+
+            scaleMatrix(Obj, Img, a, b, sx, sy);
+            printMatrix(Img, DARKGRAY);
+            printMatrix(Obj, DARKGRAY);
+            break;
+
+        case 4:
+            return 0;
+
+        default:
+            printf("Wrong choice!!");
+            return 0;
+        };
+    } while (choice >= 1 && choice <= 4);
 
     getch();
     closegraph();
